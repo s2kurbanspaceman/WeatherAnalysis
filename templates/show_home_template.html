@@ -1,0 +1,20 @@
+<!doctype html>
+<title>Smart Home Summary</title>
+{% if homename %}
+  <h1>Welcome to the {{ homename }} data summary!</h1>
+{% else %}
+  <h1>Welcome to your home data summary</h1>
+{% endif %}
+
+<h2>Netatmo Data</h2>
+<h3>Battery Status</h3>
+{% for devicename,batterystatus in devicenamekvs.items() %}
+  <p>Device Name: <strong>{{ devicename }}</strong>; Battery Status: <strong>{{ batterystatus }}</strong>
+{% endfor %}
+
+<h2>Nest Data</h2>
+
+<h2>Ring Data</h2>
+{% for devices in ringdata %}
+  <p>Device Name: <strong>{{ devices[0] }} </strong>; Battery Status: <strong>{{ devices[1] }}</strong>
+{% endfor %}

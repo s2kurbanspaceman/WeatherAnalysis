@@ -13,7 +13,6 @@ SCOPE,
 STATE
 )
 
-
 app = Flask(__name__)
 
 @app.route('/')
