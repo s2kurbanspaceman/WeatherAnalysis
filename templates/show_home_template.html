@@ -9,12 +9,12 @@
 <h2>Netatmo Data</h2>
 <h3>Battery Status</h3>
 {% for devicename,batterystatus in devicenamekvs.items() %}
-  <p>Name: <strong>{{ devicename }}</strong>; Battery Status: <strong>{{ batterystatus }}</strong>
+  <p>Device Name: <strong>{{ devicename }}</strong>; Battery Status: <strong>{{ batterystatus }}</strong>
 {% endfor %}
 
 <h2>Nest Data</h2>
 
 <h2>Ring Data</h2>
-{% for a,b in ringdata.items() %}
-  <p>Device: <strong> {{ b }} </strong>; Battery Status: TBD
+{% for devices in ringdata %}
+  <p>Device Name: <strong>{{ devices[0] }} </strong>; Battery Status: <strong>{{ devices[1] }}</strong>
 {% endfor %}

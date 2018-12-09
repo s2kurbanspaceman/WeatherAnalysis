@@ -74,10 +74,24 @@ def get_nest(nestauth):
     pass
 
 def get_ring():
-        rings = Ring(R_USER,R_PASS)
-        print("Ring is Connected" + str(rings.is_connected))
-        mydevices = rings.devices
-        print(mydevices)
+    '''
+    auth and get battery information
+    full list of properties: https://python-ring-doorbell.readthedocs.io/
+    :return: list of devices with battery info
+    '''
+    rings = Ring(R_USER,R_PASS)
+    print("Ring is Connected" + str(rings.is_connected))
 
-        return mydevices
+    deviceinfo = []
+
+    for dev in list(rings.stickup_cams + rings.chimes + rings.doorbells):
+        # refresh data
+        dev.update()
+        devicename = dev.name
+        batterystatus = dev.battery_life
+        print('Device Name:  %s' % devicename, 'Battery Status: %s' % batterystatus)
+        deviceinfo.append([devicename,batterystatus])
+
+    print("Device Info %s" % str(deviceinfo))
+    return list(deviceinfo)
 
