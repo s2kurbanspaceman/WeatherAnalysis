@@ -2,6 +2,7 @@
 #retrieves an access token using a client credentials method; should use secrets (git ignore for now with template)
 
 import requests
+from ring_doorbell import Ring
 
 from config import (
 USER_EMAIL,
@@ -13,7 +14,9 @@ N_CLIENT_ID,
 N_CLIENT_SECRET,
 N_STATE,
 N_AUTH_URL,
-N_AUTHCODE
+N_AUTHCODE,
+R_USER,
+R_PASS
 )
 
 def get_netatmo_access_token():
@@ -69,3 +72,12 @@ def get_netatmo(auth):
 
 def get_nest(nestauth):
     pass
+
+def get_ring():
+        rings = Ring(R_USER,R_PASS)
+        print("Ring is Connected" + str(rings.is_connected))
+        mydevices = rings.devices
+        print(mydevices)
+
+        return mydevices
+

@@ -12,3 +12,6 @@ N_CLIENT_SECRET="[client id provided by authorising nest dev app]"
 N_STATE="[random digits]"
 N_AUTHCODE="[get this from retrieving auth code from the N_AUTH_URL]"
 N_AUTH_URL="https://home.nest.com/login/oauth2?client_id=N_CLIENT_ID&state=N_STATE"
+#Ring
+R_USER="[ring account email]"
+R_PASS="[ring account pass]"

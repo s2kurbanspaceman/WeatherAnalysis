@@ -39,8 +39,9 @@ def results_formatting(station_dict,keystocheck):
 @app.route('/showall/<homename>', methods=['GET'])
 def showall(homename=None):
 
-    netatmopayload = GetStationData.get_netatmo(auth)
+    netatmopayload = GetStationData.get_netatmo(netatmoauth)
     nestpayload = GetStationData.get_nest(nestauth)
+    ringpayload = GetStationData.get_ring()
 	
     NetatmoToFormat = results_formatting (netatmopayload,NETATMO_KEYS_TO_CHECK)
     formattednetatmodata = ""
@@ -59,8 +60,9 @@ def showall(homename=None):
    
     weatherpanel = "<p>NETATMO DATA:" + formattednetatmodata + "</p>"
     heatingpanel = "<p> NEST DATA:" + str(nestpayload) + "</p>"
+    ringpanel = "<p> RING DATA:" + str(ringpayload) + "</p>"
 
-    showallcontent = weatherpanel + "<br>" + heatingpanel
+    #showallcontent = weatherpanel + "<br>" + heatingpanel + "<br>" + ringpanel
 
     devicenamebody = nested_get(netatmopayload,["devices"]) #this is a list
 
@@ -76,10 +78,14 @@ def showall(homename=None):
             
     return render_template('show_home_template.html', 
            homename=homename,devicename=devicename,batterystatus=batterystatus,
-           devicenamekvs=devicenamekvs)
+           devicenamekvs=devicenamekvs,ringdata=ringpayload)
 
 if __name__ == "__main__":
-    auth = GetStationData.get_netatmo_access_token()
+    '''
+    Get auth established and then run web app
+    Note, ring is using 3rd party lib
+    '''
+    netatmoauth = GetStationData.get_netatmo_access_token()
     nestauth = GetStationData.get_nest_access_token()
     app.run(port=5001)
 
