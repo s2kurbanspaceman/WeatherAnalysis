@@ -1,3 +1,5 @@
+.idea
+__pycache__
 venv/
 config/__init__.py
 config/__*
